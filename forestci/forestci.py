@@ -274,7 +274,7 @@ def random_forest_error(
         inbag = calc_inbag(X_train.shape[0], forest)
 
     pred = np.array([tree.predict(X_test) for tree in forest]).T
-    pred_mean = np.mean(pred, 0)
+    pred_mean = np.mean(pred, 1).reshape(X_test.shape[0], 1)
     pred_centered = pred - pred_mean
     n_trees = forest.n_estimators
     V_IJ = _core_computation(
