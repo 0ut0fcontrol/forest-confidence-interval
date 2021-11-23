@@ -27,7 +27,7 @@ spam_X_train, spam_X_test, spam_y_train, spam_y_test = train_test_split(
 
 # create RandomForestClassifier
 n_trees = 500
-spam_RFC = RandomForestClassifier(max_features=5, n_estimators=n_trees,
+spam_RFC = RandomForestClassifier(max_features=5, n_estimators=n_trees, min_samples_leaf=3,
                                   random_state=42)
 spam_RFC.fit(spam_X_train, spam_y_train)
 spam_y_hat = spam_RFC.predict_proba(spam_X_test)
