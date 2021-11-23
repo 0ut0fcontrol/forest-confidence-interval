@@ -198,7 +198,8 @@ def _centered_prediction_forest(forest, X_test):
         # reshape according to the reshaping annotation in scikit-learn
         X_test = X_test.reshape(1, -1)
 
-    pred = np.array([tree.predict(X_test) for tree in forest]).T
+    pred_prob = np.array([tree.predict_proba(X_test) for tree in forest])
+    pred = pred_prob[:,:,1].T
     pred_mean = np.mean(pred, 1).reshape(X_test.shape[0], 1)
 
     return pred - pred_mean
